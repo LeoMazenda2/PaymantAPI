@@ -7,24 +7,27 @@ import { PaymentDetailsService } from 'src/app/shared/payment-details.service';
 @Component({
   selector: 'app-payment-detail-form',
   templateUrl: './payment-detail-form.component.html',
-  styles: [
-  ]
+  styles: [],
 })
 export class PaymentDetailFormComponent {
+  constructor(
+    public service: PaymentDetailsService,
+    private toastr: ToastrService
+  ) {}
 
-    constructor(public service: PaymentDetailsService, private toastr: ToastrService ) {
-
-    }
-
-    onSubmi(form: NgForm){
-      this.service.postPaymentDetail()
-      .subscribe({
-        next: res => {
-          this.service.list = res as PaymentDetail [];
+  onSubmit(form: NgForm) {
+    this.service.formSubmitted = true;
+    if (form.valid) {
+      this.service.postPaymentDetail().subscribe({
+        next: (res) => {
+          this.service.list = res as PaymentDetail[];
           this.service.resetForm(form);
-          this.toastr.success('Inserido com sucesso!','Registo de Pagamento');
+          this.toastr.success('Inserido com sucesso!', 'Registo de Pagamento');
         },
-        error: err => { console.log(err) }
-      })
+        error: (err) => {
+          console.log(err);
+        },
+      });
     }
+  }
 }

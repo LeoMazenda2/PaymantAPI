@@ -1,4 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Quando o campo for inválido e já foi tocado (ou tentado submeter) */
+form input.ng-invalid.ng-touched,
+form input.ng-invalid.ng-dirty {
+  border: 1px solid red !important;
+  box-shadow: 0 0 4px rgba(255, 0, 0, 0.4);
+}
+
 .mouse-hove{
   cursor: pointer  ;
 }
@@ -15,4 +23,8 @@ form input{
 form input::placeholder{
   color: #c0bdbd;
   font-weight: 300;
+}
+
+form.submitted input.ng-invalid{
+  border: red;
 }
