@@ -1,1 +1,41 @@
-<p>payment-detail-form works!</p>
+<form #form="ngForm" (submit)="onSubmi(form)" >
+  <input type="hidden" name="paymentDetailId" [value]="service.formDate.paymentDetailId">
+  <div class="mb-3">
+    <label for="cardOwnerName" class="form-label">Nome do Titular do Cartão</label>
+    <input type="text" class="form-control form-control-lg"
+    #cardOwnerName="ngModel" name="cardOwnerName"
+    [(ngModel)]="service.formDate.cardOwnerName"
+    placeholder="Nome do Cartão" />
+  </div>
+  <div class="mb-3">
+    <label for="cardNumber" class="form-label">Número do Cartão</label>
+    <input type="text" class="form-control form-control-lg"
+    #cardNumber="ngModel" name="cardNumber"
+    [(ngModel)]="service.formDate.cardNumber"
+    placeholder="16 números do Cartão" />
+  </div>
+
+  <div class="row">
+      <div class="mb-3 col-6">
+      <label for="securityCode" class="form-label">Código secreto</label>
+      <input type="text" class="form-control form-control-lg"
+      #securityCode="ngModel" name="securityCode"
+      [(ngModel)]="service.formDate.securityCode"
+      placeholder="CVV" type="password" />
+    </div>
+    <div class="mb-3 col-6">
+      <label for="expirationDate" class="form-label">Data de Expiração</label>
+      <input type="text" class="form-control form-control-lg"
+      #expirationDate="ngModel" name="expirationDate"
+      [(ngModel)]="service.formDate.expirationDate"
+      placeholder="MM/YY"/>
+    </div>
+  </div>
+
+
+  <div class="d-grid">
+    <button type="submit" class="btn btn-lg btn-success" type="submit">
+      Submeter
+    </button>
+  </div>
+</form>

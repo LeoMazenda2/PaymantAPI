@@ -12,6 +12,7 @@ export class PaymentDetailsComponent implements OnInit {
   constructor(public service: PaymentDetailsService) {
 
   }
+
   ngOnInit(): void {
     this.service.refreshList();
   }
