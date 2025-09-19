@@ -6,10 +6,9 @@ import { PaymentDetail } from './payment-detail.model';
 import { NgForm } from '@angular/forms';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PaymentDetailsService {
-
   private url: string = `${environment.baseUrl}/PaymentDetal`;
   list: PaymentDetail[] = [];
   formDate: PaymentDetail = new PaymentDetail();
@@ -24,20 +23,25 @@ export class PaymentDetailsService {
 
   // 🔹 Método apenas para log (útil em debug, mas não em produção)
   refreshList(): void {
-    this.http.get(this.url)
-    .subscribe({
-      next: res => {
+    this.http.get(this.url).subscribe({
+      next: (res) => {
         this.list = res as PaymentDetail[];
       },
-      error: err => {console.error(err)}
+      error: (err) => {
+        console.error(err);
+      },
     });
   }
 
-  postPaymentDetail(){
-    return this.http.post(this.url, this.formDate)
+  postPaymentDetail() {
+    return this.http.post(this.url, this.formDate);
   }
 
-  resetForm(form:NgForm){
+  putPaymentDetail() {
+    return this.http.put(this.url + '/' + this.formDate.paymentDetailId, this.formDate);
+  }
+
+  resetForm(form: NgForm) {
     form.form.reset();
     this.formDate = new PaymentDetail();
     this.formSubmitted = false;
